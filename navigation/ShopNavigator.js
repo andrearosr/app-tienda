@@ -21,7 +21,13 @@ function ShopNavigator() {
           headerTintColor: Platform.OS === 'ios' ? COLORS.primary : 'white'
         }}
       >
-        <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+        <Stack.Screen
+          name="ProductDetail"
+          component={ProductDetailScreen}
+          options={({ route }) => ({
+            title: route.params.name,
+          })}
+        />
         <Stack.Screen
           name="Categories"
           component={CategoriesScreen}
