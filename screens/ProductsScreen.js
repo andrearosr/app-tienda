@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-function ProductsScreen({ navigation }) {
+function ProductsScreen({ navigation, route }) {
   const handlePress = () => {
     navigation.navigate('ProductDetail')
   }
