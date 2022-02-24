@@ -1,32 +1,32 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
+import ProductItem from '../components/ProductItem';
+import { BREADS } from '../data/breads';
 
-function ProductsScreen({ navigation }) {
-  const handlePress = () => {
-    navigation.navigate('ProductDetail')
+function ProductsScreen({ navigation, route }) {
+  const filteredProducts = BREADS.filter(item => item.category === route.params.categoryID)
+
+  const handlePress = (item) => {
+    navigation.navigate('ProductDetail', {
+      name: item.name,
+      breadID: item.id,
+    })
   }
 
+  const renderItem = ({ item }) => (
+    <ProductItem
+      item={item}
+      onSelected={handlePress}
+    />
+  )
+
   return (
-    <View style={styles.screen}>
-      <Text>
-        Products screen
-      </Text>
-      <Button
-        onPress={handlePress}
-        title="Ir al detalle"
-      />
-    </View>
+    <FlatList
+      data={filteredProducts}
+      renderItem={renderItem}
+    />
   )
 }
 
-
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-})
 
 export default ProductsScreen
