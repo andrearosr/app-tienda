@@ -16,7 +16,7 @@ function ShopNavigator() {
       screenOptions={{
         headerStyle: styles.header,
         headerTitleStyle: styles.headerTitle,
-        headerTintColor: Platform.OS === 'ios' ? COLORS.primary : 'white'
+        headerTintColor: Platform.OS === 'ios' ? COLORS.primary : 'white',
       }}
     >
       <Stack.Screen
