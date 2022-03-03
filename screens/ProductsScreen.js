@@ -1,16 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 import ProductItem from '../components/ProductItem';
-import { BREADS } from '../data/breads';
 
-function ProductsScreen({ navigation, route }) {
+function ProductsScreen({ navigation }) {
+  const breads = useSelector(state => state.breads.list);
+  const selectedCategory = useSelector(state => state.categories.selected);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
   useEffect(() => {
     console.log('Hola!')
      
     return () => console.log('Chao')
   }, []);
 
-  const filteredProducts = BREADS.filter(item => item.category === route.params.categoryID)
+  useEffect(() => {
+    setFilteredProducts(breads.filter(item => item.category === selectedCategory.id));
+  }, [selectedCategory])
+
 
   const handlePress = (item) => {
     navigation.navigate('ProductDetail', {
