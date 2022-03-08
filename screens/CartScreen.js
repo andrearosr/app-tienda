@@ -1,11 +1,18 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
 import CartItem from '../components/CartItem';
 import { CART } from '../data/cart';
+import { confirmCart } from '../store/actions/cart.action';
 
 const CartScreen = () => {
+  const dispatch = useDispatch();
+
   const handlerDeleteItem = (id) => {};
-  const handlerConfirmCart = () => {};
+  
+  const handlerConfirmCart = () => {
+    dispatch(confirmCart(CART, 2300));
+  };
 
   const renderItem = (data) => (
     <CartItem item={data.item} onDelete={handlerDeleteItem} />
