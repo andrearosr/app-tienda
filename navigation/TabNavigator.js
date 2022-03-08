@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AntDesign } from '@expo/vector-icons'; 
 import ShopNavigator from './ShopNavigator'
 import CartNavigator from './CartNavigator';
+import OrdersScreen from '../screens/OrdersScreen';
 
 const Tab = createBottomTabNavigator()
 
@@ -37,6 +38,22 @@ function TabNavigator() {
         component={CartNavigator}
         options={{
           tabBarLabel: "Carrito",
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.item}>
+              <AntDesign
+                name="shoppingcart"
+                size={24}
+                color={focused ? 'blue' : 'black'}
+              />
+            </View>
+          )
+        }}
+      />
+      <Tab.Screen
+        name="OrdersTab"
+        component={OrdersScreen}
+        options={{
+          tabBarLabel: "Ordenes",
           tabBarIcon: ({ focused }) => (
             <View style={styles.item}>
               <AntDesign
