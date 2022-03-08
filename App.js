@@ -5,10 +5,12 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import MainNavigator from './navigation';
+import AlertContainer from './screens/AlertContainer';
 
 export default function App() {
   return (
     <Provider store={store}>
+      <AlertContainer />
       <MainNavigator />
     </Provider>
   );

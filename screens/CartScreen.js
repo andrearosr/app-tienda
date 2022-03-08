@@ -1,18 +1,30 @@
-import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
 import { CART } from '../data/cart';
 import { confirmCart } from '../store/actions/cart.action';
 
 const CartScreen = () => {
   const dispatch = useDispatch();
+  const status = useSelector(state => state.cart.status);
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (status === "loading") {
+      setLoading(true)
+    } else {
+      setLoading(false)
+    }
+  }, [status]);
 
   const handlerDeleteItem = (id) => {};
   
   const handlerConfirmCart = () => {
     dispatch(confirmCart(CART, 2300));
   };
+
 
   const renderItem = (data) => (
     <CartItem item={data.item} onDelete={handlerDeleteItem} />
@@ -28,13 +40,19 @@ const CartScreen = () => {
         />
       </View>
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.confirm} onPress={handlerConfirmCart}>
-          <Text>Confirmar</Text>
-          <View style={styles.total}>
-            <Text style={styles.text}>Total</Text>
-            <Text style={styles.text}>$1600</Text>
-          </View>
-        </TouchableOpacity>
+        {loading 
+          ? <ActivityIndicator size="large" />
+          : (
+            <TouchableOpacity style={styles.confirm} onPress={handlerConfirmCart}>
+              <Text>Confirmar</Text>
+              <View style={styles.total}>
+                <Text style={styles.text}>Total</Text>
+                <Text style={styles.text}>$1600</Text>
+              </View>
+            </TouchableOpacity>
+          )
+        }
+        
       </View>
     </View>
   );
