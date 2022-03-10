@@ -1,1 +1,2 @@
 export const API_URL = "https://app-tienda-364a2-default-rtdb.firebaseio.com";
+export const SIGNUP_API_URL = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC734hDUEj2Gf0XGe0Cutsc3Ms_RisMdtc"
